@@ -1,7 +1,7 @@
 // DM provider abstraction: Gemini (cloud) or Ollama (host's PC).
 // All Gemini calls happen in the host's browser; same for Ollama (browser →
 // localhost:11434). We pick which provider via localStorage on the host.
-const GEMINI_MODEL_ID = "gemini-2.5-flash";
+const GEMINI_MODEL_ID = "gemini-3.8-flash";
 const GEMINI_ENDPOINT =
   `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL_ID}:generateContent`;
 const KEY_STORAGE = "jjk_rpg_gemini_key_v1";
