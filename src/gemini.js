@@ -2,9 +2,8 @@
 // All Gemini calls happen in the host's browser; same for Ollama (browser →
 // localhost:11434). We pick which provider via localStorage on the host.
 const GEMINI_MODEL_ID = "gemini-2.5-flash";
-const GEMINI_ENDPOINT = (key) =>
-  `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL_ID}:generateContent?key=${encodeURIComponent(key)}`;
-
+const GEMINI_ENDPOINT =
+  `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL_ID}:generateContent`;
 const KEY_STORAGE = "jjk_rpg_gemini_key_v1";
 const PROVIDER_STORAGE = "jjk_rpg_provider_v1";       // "gemini" | "ollama"
 const OLLAMA_CFG_STORAGE = "jjk_rpg_ollama_cfg_v1";   // { url, model }
@@ -300,7 +299,14 @@ export async function callGemini({ apiKey, systemPrompt, userMessage, history = 
     ],
   };
 
-  const res = await fetch(GEMINI_ENDPOINT(apiKey), {
+  const res = await fetch(GEMINI_ENDPOINT, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "x-goog-api-key": apiKey
+  },
+  body: JSON.stringify(body),
+});
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
