@@ -80,7 +80,7 @@ function bootKeyGate() {
     const provider = (document.querySelector('input[name="provider"]:checked') || {}).value || "gemini";
     if (provider === "gemini") {
       const key = keyInput.value.trim();
-      if (!key.startsWith("AIza") || key.length < 30) {
+      if (!(key.startsWith("AIza") || key.startsWith("AQ.")) || key.length < 30) {
         toast("That doesn't look like a Gemini API key (should start with 'AIza').", "warn");
         return;
       }
