@@ -300,9 +300,6 @@ export async function callGemini({ apiKey, systemPrompt, userMessage, history = 
   };
 
   const res = await fetch(GEMINI_ENDPOINT, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
     "x-goog-api-key": apiKey
   },
   body: JSON.stringify(body),
