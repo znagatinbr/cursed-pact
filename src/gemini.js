@@ -300,14 +300,18 @@ export async function callGemini({ apiKey, systemPrompt, userMessage, history = 
   };
 
   const res = await fetch(GEMINI_ENDPOINT, {
-    "x-goog-api-key": apiKey
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "x-goog-api-key": apiKey,
   },
   body: JSON.stringify(body),
 });
-  if (!res.ok) {
-    const errText = await res.text().catch(() => "");
-    throw new Error(`Gemini API error ${res.status}: ${errText.slice(0, 400)}`);
-  }
+
+if (!res.ok) {
+  const errText = await res.text().catch(() => "");
+  throw new Error(`Gemini API error ${res.status}: ${errText.slice(0, 400)}`);
+}
   const data = await res.json();
 
   if (data.promptFeedback?.blockReason) {
