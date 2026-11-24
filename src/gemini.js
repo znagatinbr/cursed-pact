@@ -307,11 +307,6 @@ export async function callGemini({ apiKey, systemPrompt, userMessage, history = 
   },
   body: JSON.stringify(body),
 });
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-
   if (!res.ok) {
     const errText = await res.text().catch(() => "");
     throw new Error(`Gemini API error ${res.status}: ${errText.slice(0, 400)}`);
